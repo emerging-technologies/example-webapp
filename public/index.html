@@ -49,7 +49,7 @@
           // From: https://medium.freecodecamp.com/how-to-reverse-a-string-in-javascript-in-3-different-ways-75e4763c68cb#.vdkzw58fq
           // $("#output").val($("#userinput").val().split("").reverse().join(""))
           $.get("/reverse/" + encodeURIComponent($("#userinput").val()), function(data) {
-             $("#output").val(data)
+             $("#output").html(data)
           })
         });
     </script>
