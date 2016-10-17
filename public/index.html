@@ -44,13 +44,21 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
   
     <script>
+      // Timer adapted from: http://stackoverflow.com/questions/4220126/run-javascript-function-when-user-finishes-typing-instead-of-on-key-up
+      var userInputTimer;
+
       $("#userinput")
         .on('input',function(e){
           // From: https://medium.freecodecamp.com/how-to-reverse-a-string-in-javascript-in-3-different-ways-75e4763c68cb#.vdkzw58fq
           // $("#output").val($("#userinput").val().split("").reverse().join(""))
-          $.get("/reverse/" + encodeURIComponent($("#userinput").val()), function(data) {
-             $("#output").html(data)
-          })
+
+          clearTimeout(userInputTimer);
+          userInputTimer = setTimeout(function() {
+            $.get("/reverse/" + encodeURIComponent($("#userinput").val()), function(data) {
+              $("#output").html(data)
+            })
+          }, 5000);
+
         });
     </script>
   </body>
